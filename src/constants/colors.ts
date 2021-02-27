@@ -14,10 +14,12 @@ const colors = {
   purpleGray: '#5E5474',
   darkGray1: '#514184',
   darkGray2: '#473D65',
+  darkGray3: '#41375F',
   yellow: '#FFE815',
   red: '#FF6060',
   green: '#6DECA2',
   background: '#312651',
+  PurpleGray: '#5E5474',
 }
 
 export default colors
