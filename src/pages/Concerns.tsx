@@ -1,4 +1,5 @@
 import React from 'react'
-import Layout from 'components/Layout'
+import Layout from 'components/layout'
 
-export default () => <Layout>고민 리스트</Layout>
+const Concerns = () => <Layout title="따근따근한 고민 보기">고민 리스트</Layout>
+export default Concerns

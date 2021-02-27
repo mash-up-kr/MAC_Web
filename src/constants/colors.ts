@@ -17,6 +17,7 @@ const colors = {
   yellow: '#FFE815',
   red: '#FF6060',
   green: '#6DECA2',
+  background: '#312651',
 }
 
 export default colors
