@@ -29,6 +29,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     line-height: 1;
     font-family: 'NanumSquareRound', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
   ol, ul {
     list-style: none;
