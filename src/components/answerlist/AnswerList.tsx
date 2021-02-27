@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AnswerComp from './AnswerItem'
+import AnswerItem from './AnswerItem'
 import styled from 'styled-components'
 import { AnswerListProps } from 'types/Answer'
 
@@ -8,7 +8,9 @@ function AnswerList({ answers }: AnswerListProps) {
     <>
       <AnswerListLayout>
         {answers.map(answer => (
-          <AnswerComp
+          <AnswerItem
+            key={answer.id}
+            id={answer.id}
             name={answer.name}
             contents={answer.contents}
             time={answer.time}
@@ -30,7 +32,7 @@ const AnswerListLayout = styled.div`
   height: fit-content;
   margin-top: 20px;
   padding-top: 40px;
-  background-color: #514184;
+  background-color: ${props => props.theme.colors.darkGray1};
   border-radius: 32px 32px 0px 0px;
   color: white;
 `

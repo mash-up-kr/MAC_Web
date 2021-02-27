@@ -15,6 +15,7 @@ export default Concern
 // dummy
 const dummy: Answer[] = [
   {
+    id: 1,
     name: '또또로',
     contents:
       '남자친구와 만난지 3년이 되어갑니다. 그런데 며칠전 남자친구의 휴대폰을 우연히 보게 되었어요...',
@@ -22,6 +23,7 @@ const dummy: Answer[] = [
     likeNum: 10,
   },
   {
+    id: 2,
     name: '로또',
     contents:
       '남자친구와 만난지 3년이 되어갑니다. 그런데 며칠전 남자친구의 휴대폰을 우연히 보게 되었어요...',

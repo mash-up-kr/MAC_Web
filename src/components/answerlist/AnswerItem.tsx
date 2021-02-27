@@ -3,28 +3,26 @@ import styled from 'styled-components'
 import { Answer } from 'types/Answer'
 import heart from './../../assets/heart.svg'
 
-function AnswerComp({ name, contents, time, likeNum }: Answer) {
+function AnswerItem({ name, contents, time, likeNum }: Answer) {
   const [like, setLike] = useState<number>(likeNum)
   const addLike = () => setLike(like + 1)
 
   return (
-    <>
-      <AnswerBlock>
-        <div>{name}</div>
-        <div className="contents">{contents}</div>
-        <AnswerInfoBlock>
-          <div className="time">{time}</div>
-          <div className="likeButton" onClick={addLike}>
-            <img src={heart} alt="heart icon" />
-            {like}
-          </div>
-        </AnswerInfoBlock>
-      </AnswerBlock>
-    </>
+    <AnswerBlock>
+      <div>{name}</div>
+      <div className="contents">{contents}</div>
+      <AnswerInfoBlock>
+        <div className="time">{time}</div>
+        <div className="likeButton" onClick={addLike}>
+          <img src={heart} alt="heart icon" />
+          {like}
+        </div>
+      </AnswerInfoBlock>
+    </AnswerBlock>
   )
 }
 
-export default AnswerComp
+export default AnswerItem
 
 const AnswerBlock = styled.div`
   display: inline-block;
@@ -52,7 +50,7 @@ const AnswerInfoBlock = styled.div`
 
   .time {
     display: inline-block;
-    color: #716d74;
+    color: ${props => props.theme.colors.gray07};
     align-items: center;
     justify-content: center;
     padding-right: 120px;
@@ -65,7 +63,7 @@ const AnswerInfoBlock = styled.div`
     height: 24px;
     align-items: center;
     justify-content: center;
-    background-color: #5e5474;
+    background-color: ${props => props.theme.colors.purpleGray};
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
