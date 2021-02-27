@@ -1,7 +1,8 @@
 import React from 'react'
+import Routes from './Routes'
 
 function App() {
-  return <div>hello world!</div>
+  return <Routes />
 }
 
 export default App
