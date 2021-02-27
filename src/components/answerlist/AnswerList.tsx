@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AnswerComp from './AnswerComp'
+import AnswerComp from './AnswerItem'
 import styled from 'styled-components'
 import { AnswerListProps } from 'types/Answer'
 
@@ -28,8 +28,10 @@ const AnswerListLayout = styled.div`
   position: relative;
   width: 360px;
   height: fit-content;
+  margin-top: 20px;
+  padding-top: 40px;
   background-color: #514184;
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 32px 32px 0px 0px;
   color: white;
 `
 const AnswerInput = styled.textarea`
@@ -45,7 +47,13 @@ const AnswerInput = styled.textarea`
   ::placeholder {
     color: white;
     padding: 10px;
+    font-weight: normal;
+    font-size: 12px;
   }
+  padding: 10px;
+  font-weight: normal;
+  font-size: 12px;
+  color: white;
 `
 const AnswerInputButton = styled.button`
   width: 360px;
