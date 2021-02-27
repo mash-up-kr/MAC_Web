@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Answer } from 'types/Answer'
 
 function AnswerComp({ name, contents, time, likeNum }: Answer) {
+  const [like, setLike] = useState<number>(likeNum)
+  const addLike = () => setLike(like + 1)
+
   return (
     <>
       <AnswerBlock>
@@ -10,7 +13,9 @@ function AnswerComp({ name, contents, time, likeNum }: Answer) {
         <div className="contents">{contents}</div>
         <AnswerInfoBlock>
           <div className="time">{time}</div>
-          <div className="likeButton">{likeNum}</div>
+          <div className="likeButton" onClick={addLike}>
+            {like}
+          </div>
         </AnswerInfoBlock>
       </AnswerBlock>
     </>
@@ -61,5 +66,6 @@ const AnswerInfoBlock = styled.div`
     background-color: #5e5474;
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
   }
 `
