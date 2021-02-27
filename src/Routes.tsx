@@ -3,17 +3,16 @@ import {
   Route,
   RouteComponentProps,
   Switch,
-  useLocation,
   withRouter,
 } from 'react-router-dom'
-import Layout from 'components/layout'
+import Concerns from 'pages/Concerns'
+import Concern from 'pages/Concern'
 
 const Routes: FC<RouteComponentProps> = () => {
-  const location = useLocation()
-
   return (
     <Switch>
-      <Route exact path="/test" component={Layout} />
+      <Route exact path="/concerns" component={Concerns} />
+      <Route exact path="/concern/:edit" component={Concern} />
     </Switch>
   )
 }
