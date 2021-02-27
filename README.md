@@ -8,6 +8,7 @@
 - hot-fix 핫 버그 수정
 - bug-fix 버그 수정
 - refactor 기능 수정 추가 및 코드 수정
+- wip 작업 중일 때
 
 #### Commit Prefix
 
