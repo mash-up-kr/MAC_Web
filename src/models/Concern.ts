@@ -1,7 +1,7 @@
 /* External dependencies */
 import Immutable from 'immutable'
 
-interface ConcernAttr {
+export interface ConcernAttrPOJO {
   id: number
   title: string
   content: string
@@ -9,6 +9,8 @@ interface ConcernAttr {
   updatedAt: string
   deletedAt: string
 }
+
+interface ConcernAttr extends ConcernAttrPOJO {}
 
 const ConcernRecord = Immutable.Record<ConcernAttr>({
   id: 0,
