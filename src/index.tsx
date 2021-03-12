@@ -3,8 +3,10 @@ import 'react-app-polyfill/stable'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
+import ReduxStore from 'modules/reduxStore'
 import colors from 'constants/colors'
 import media from 'constants/media'
 import App from 'App'
@@ -18,9 +20,11 @@ const theme = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={ReduxStore.getStore()}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 )
