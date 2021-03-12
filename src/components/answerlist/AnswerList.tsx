@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AnswerItem from './AnswerItem'
 import styled from 'styled-components'
 import { AnswerListProps } from 'types/Answer'
