@@ -1,8 +1,8 @@
 /* External dependencies */
-import axios from 'axios'
+// import axios from 'axios'
 
 /* Internal dependencies */
-import { GetConcernListPayload } from 'modules/reducers/concernReducer'
+// import { GetConcernListPayload } from 'modules/reducers/concernReducer'
 import { ConcernAttrPOJO } from 'models/Concern'
 import { ResponseType } from 'utils/reduxUtils'
 
