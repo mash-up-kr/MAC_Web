@@ -6,5 +6,6 @@ export interface Answer {
   name: string
   contents: string
   time: string
+  like: boolean
   likeNum: number
 }
