@@ -15,6 +15,7 @@ const colors = {
   darkGray1: '#514184',
   darkGray2: '#473D65',
   darkGray3: '#41375F',
+  darkPupple: '#423374',
   yellow: '#FFE815',
   red: '#FF6060',
   green: '#6DECA2',
