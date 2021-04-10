@@ -6,15 +6,16 @@ import { endsWith } from 'lodash-es'
 import * as Styled from './SVGIcon.styled'
 
 interface SVGIconProps {
+  className?: string
   name: string
   size: number
 }
 
-function SVGIcon({ name, size }: SVGIconProps) {
+function SVGIcon({ className, name, size }: SVGIconProps) {
   const src = useMemo(() => {
     const fileName = endsWith(name, '.svg') ? name : `${name}.svg`
     try {
-      return require(`assets/${fileName}`)
+      return require(`assets/${fileName}`).default
     } catch (e) {
       console.error(
         `cannot find icon name ${name}. Pleace check again. error message : ${e.message}`,
@@ -23,7 +24,7 @@ function SVGIcon({ name, size }: SVGIconProps) {
   }, [name])
 
   return (
-    <Styled.SVGIconWrapper size={size}>
+    <Styled.SVGIconWrapper className={className} size={size}>
       <Styled.SVGIcon src={src} />
     </Styled.SVGIconWrapper>
   )

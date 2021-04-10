@@ -13,7 +13,7 @@ interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   style?: React.CSSProperties
   containerClassName?: string
   containerStyle?: React.CSSProperties
-  container?: HTMLElement
+  container?: HTMLElement | null
   target: HTMLElement | null
   placement?: OverlayPosition
   keepInContainer?: boolean

@@ -8,13 +8,14 @@ interface SelectProps {
   className?: string
   showSelect: boolean
   target: HTMLElement | null
-  container?: HTMLElement
+  container?: HTMLElement | null
   placement?: OverlayPosition
   marginX?: number
   marginY?: number
   defaultKey?: any
   children: React.ReactElement[]
   onSelect?: (value: any) => void
+  onHide?: () => void
 }
 
 function Select({
@@ -28,6 +29,7 @@ function Select({
   defaultKey,
   children,
   onSelect = noop,
+  onHide = noop,
 }: SelectProps) {
   const [currentSelectedKey, setCurrentSelectedKey] = useState(defaultKey)
 
@@ -35,19 +37,21 @@ function Select({
     (value: any, key: any) => {
       onSelect(value)
       setCurrentSelectedKey(key)
+      onHide()
     },
-    [onSelect],
+    [onSelect, onHide],
   )
 
   const OptionList = useMemo(
     () =>
       React.Children.map(children, child => {
-        if (child.type !== Option) {
+        // @ts-ignore
+        if (child.type.displayName !== Option.displayName) {
           return null
         }
 
         return React.cloneElement(child, {
-          selected: currentSelectedKey === child.props.key,
+          selected: currentSelectedKey === child.props.optionKey,
           onSelectOption: handleSelectOption,
         })
       }),
@@ -63,6 +67,7 @@ function Select({
       placement={placement}
       marginX={marginX}
       marginY={marginY}
+      onHide={onHide}
     >
       {OptionList}
     </Overlay>
