@@ -1,31 +1,40 @@
 import React, { useCallback } from 'react'
+import { noop } from 'lodash-es'
 
 import * as Styled from './Option.styled'
 
 interface OptionProps {
+  className?: string
   value?: any
-  key?: any
+  optionKey?: any
   selected?: boolean
   children: React.ReactNode
-  onSelectOption: (value: any, key: any) => any
+  onSelectOption?: (value: any, optionKey: any) => any
 }
 
 function Option({
+  className,
   value,
-  key,
+  optionKey,
   selected = false,
   children,
-  onSelectOption,
+  onSelectOption = noop,
 }: OptionProps) {
   const handleSelectOption = useCallback(() => {
-    onSelectOption(value, key)
-  }, [value, key, onSelectOption])
+    onSelectOption(value, optionKey)
+  }, [value, optionKey, onSelectOption])
 
   return (
-    <Styled.Option selected={selected} onClick={handleSelectOption}>
+    <Styled.Option
+      className={className}
+      selected={selected}
+      onClick={handleSelectOption}
+    >
       {children}
     </Styled.Option>
   )
 }
+
+Option.displayName = 'Option'
 
 export default Option
