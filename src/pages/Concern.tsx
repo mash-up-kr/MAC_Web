@@ -5,7 +5,7 @@ import { Answer } from 'types/Answer'
 import Answers from 'components/answerlist/Answers'
 
 const Concern = () => (
-  <Layout title="고민 카드">
+  <Layout>
     <ConcernContainer />
     <Answers answers={dummy} />
   </Layout>
