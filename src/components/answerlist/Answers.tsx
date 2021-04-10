@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import AnswerItem from './AnswerItem'
 import * as Styled from './Answers.Styled'
 import { AnswerListProps } from 'types/Answer'
 import arrow from './../../assets/arrow.svg'
-import { updateLanguageServiceSourceFile } from 'typescript'
 
 function Answers({ answers }: AnswerListProps) {
   const [up, setUp] = useState(false)

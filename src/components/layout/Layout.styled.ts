@@ -1,17 +1,20 @@
 import styled from 'styled-components'
 
 export const MainLayout = styled.div`
-  min-width: 360px;
-  max-width: 640px;
-  min-height: 640px;
-  background-color: ${props => props.theme.colors.background};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 `
-export const Header = styled('div')`
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 23px;
-  text-align: center;
-  text-align: center;
-  color: #ffffff;
-  padding: 18px 0 20px;
+
+export const Wrapper = styled.div`
+  width: 360px;
+  height: 640px;
+  background-color: ${props => props.theme.colors.background};
+
+  @media ${({ theme }) => theme.media.mobileM} {
+    width: 100%;
+    height: 100vh;
+  }
 `
