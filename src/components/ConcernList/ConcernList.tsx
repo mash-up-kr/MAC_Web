@@ -12,7 +12,7 @@ import ConcernItem from 'components/ConcernItem'
 import * as Styled from './ConcernList.styled'
 
 interface ConcernListProps {
-  concernList: Immutable.Map<number, Concern>
+  concernList: Immutable.List<Concern>
 }
 
 function ConcernList({ concernList }: ConcernListProps) {
