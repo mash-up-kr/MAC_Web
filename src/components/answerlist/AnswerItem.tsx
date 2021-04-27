@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import * as Styled from './AnswerItem.Styled'
-import { Answer, AnswerListProps } from 'types/Answer'
 import redheart from './../../assets/heart.svg'
 import grayheart from './../../assets/grayheart.svg'
 

@@ -64,14 +64,16 @@ export const createAsyncActionsAndSaga = <F, S, E>(
   const asyncSaga = function* (action: ActionType<AT>) {
     yield put(asyncActions.fetching())
     try {
-      const { data } = yield call(request, action.payload)
+      const {
+        data: { data: result },
+      } = yield call(request, action.payload)
       const resolve = get(action, ['meta', 'resolve'])
 
       if (isFunction(resolve)) {
-        resolve(data)
+        resolve(result)
       }
 
-      yield put(asyncActions.success(data))
+      yield put(asyncActions.success(result))
     } catch (error) {
       const reject = get(action, ['meta', 'reject'])
 

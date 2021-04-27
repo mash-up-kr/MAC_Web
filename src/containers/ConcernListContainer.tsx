@@ -1,46 +1,27 @@
-import React from 'react'
+/* External dependencies */
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+/* Internal dependencies */
+import { getConcernList } from 'modules/reducers/concernReducer'
+import * as concernSelector from 'modules/selectors/concernSelector'
 import ConcernList from 'components/ConcernList'
 
-const MOCK_CONCERN_LIST = [
-  {
-    id: 1,
-    title: 'title1',
-    content: 'content1',
-    createdAt: '2010.02.12 오전 08:00 ',
-    category: {
-      name: '연애',
-      imageUrl: '',
-    },
-  },
-  {
-    id: 2,
-    title: 'title2',
-    content: 'content2',
-    createdAt: '2010.02.12 오전 08:00 ',
-    category: {
-      name: '연애',
-      imageUrl: '',
-    },
-  },
-  {
-    id: 3,
-    title: 'title3',
-    content: 'content3',
-    createdAt: '2010.02.12 오전 08:00 ',
-    category: {
-      name: '연애',
-      imageUrl: '',
-    },
-  },
-]
-
 function ConcernListContainer() {
-  return (
-    <>
-      <ConcernList concernList={MOCK_CONCERN_LIST} />
-    </>
-  )
+  const dispatch = useDispatch()
+  const concernList = useSelector(concernSelector.getConcernList)
+
+  useEffect(() => {
+    dispatch(
+      getConcernList({
+        /* 임시 데이터 */
+        minKilometer: 0,
+        maxKilometer: 0,
+      }),
+    )
+  }, [dispatch])
+
+  return <ConcernList concernList={concernList} />
 }
 
 export default ConcernListContainer

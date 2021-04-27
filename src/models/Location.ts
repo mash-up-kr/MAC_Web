@@ -1,16 +1,16 @@
 /* External dependencies */
 import Immutable from 'immutable'
 
-interface LocationAttr {
-  id: number
-  latitude: number
-  longitude: number
+interface LocationAttrPOJO {
+  type: string
+  coordinates: number[]
 }
 
+interface LocationAttr extends LocationAttrPOJO {}
+
 const LocationRecord = Immutable.Record<LocationAttr>({
-  id: 0,
-  latitude: 0,
-  longitude: 0,
+  type: '',
+  coordinates: [],
 })
 
 class Location extends LocationRecord {}

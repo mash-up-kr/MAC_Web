@@ -4,7 +4,7 @@ import ConcernListContainer from 'containers/ConcernListContainer'
 
 const Concerns = () => {
   return (
-    <Layout title="따근따근한 고민 보기">
+    <Layout>
       <ConcernListContainer />
     </Layout>
   )

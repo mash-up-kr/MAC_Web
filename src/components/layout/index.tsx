@@ -1,19 +1,11 @@
 import React from 'react'
-import { MainLayout, Header } from './Layout.styled'
+import { MainLayout, Wrapper } from './Layout.styled'
 
-const Layout = ({
-  title = '',
-  children,
-}: {
-  title: string
-  children: React.ReactNode
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <MainLayout>
-      <Header>{title}</Header>
-      {children}
+      <Wrapper>{children}</Wrapper>
     </MainLayout>
   )
 }
-
 export default Layout
