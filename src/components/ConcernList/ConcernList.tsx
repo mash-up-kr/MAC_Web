@@ -1,5 +1,9 @@
+/* External dependencies */
 import React, { useMemo, useState } from 'react'
+import Immutable from 'immutable'
 
+/* Internal dependencies */
+import Concern from 'models/Concern'
 import useIsShow from 'hooks/useIsShow'
 import Category, { categoryList } from 'constants/Category'
 import Distance, { distanceList } from 'constants/Distance'
@@ -8,7 +12,7 @@ import ConcernItem from 'components/ConcernItem'
 import * as Styled from './ConcernList.styled'
 
 interface ConcernListProps {
-  concernList: any
+  concernList: Immutable.List<Concern>
 }
 
 function ConcernList({ concernList }: ConcernListProps) {
