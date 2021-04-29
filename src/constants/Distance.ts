@@ -1,11 +1,11 @@
 import { toArray } from 'lodash-es'
 
 enum Distance {
-  D3 = '3km',
-  D5 = '5km',
-  D10 = '10km',
-  D50 = '50km',
-  D100 = '100km',
+  D3 = 3,
+  D5 = 5,
+  D10 = 10,
+  D50 = 50,
+  D100 = 100,
 }
 
 export const distanceList = toArray(Distance)

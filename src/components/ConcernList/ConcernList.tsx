@@ -8,18 +8,19 @@ import useIsShow from 'hooks/useIsShow'
 import Category, { categoryList } from 'constants/Category'
 import Distance, { distanceList } from 'constants/Distance'
 import Emotion, { emotionList } from 'constants/Emotion'
+import { QueryProps } from 'containers/ConcernListContainer'
 import ConcernItem from 'components/ConcernItem'
 import * as Styled from './ConcernList.styled'
 
+export type Value = Category | Distance | Emotion
+
 interface ConcernListProps {
   concernList: Immutable.List<Concern>
+  query: QueryProps
+  onChangeValue: (key: string, value: Value) => void
 }
 
-function ConcernList({ concernList }: ConcernListProps) {
-  const [currentCtegory, setCurrentCtegory] = useState(Category.Love)
-  const [currentDistance, setCurrentDistance] = useState(Distance.D3)
-  const [currentEmotion, setCurrentEmotion] = useState(Emotion.Happy)
-
+function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
   const [
     filterListWrapperRef,
     setFilterListWrapperRef,
@@ -64,7 +65,7 @@ function ConcernList({ concernList }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={currentCtegory}
+            value={query.category ?? ''}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -79,8 +80,7 @@ function ConcernList({ concernList }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          defaultKey={Category.Love}
-          onSelect={setCurrentCtegory}
+          onSelect={(value: Category) => onChangeValue('category', value)}
           onHide={handleHideCategorySelect}
         >
           {categoryList.map(category => (
@@ -97,11 +97,12 @@ function ConcernList({ concernList }: ConcernListProps) {
     ),
     [
       categoryTargetRef,
-      currentCtegory,
+      query,
       filterListWrapperRef,
       handleHideCategorySelect,
       handleShowCategorySelect,
       showCategorySelect,
+      onChangeValue,
     ],
   )
 
@@ -115,7 +116,7 @@ function ConcernList({ concernList }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={currentDistance}
+            value={query.distance ? `${query.distance}km` : ''}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -130,8 +131,7 @@ function ConcernList({ concernList }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          defaultKey={Distance.D3}
-          onSelect={setCurrentDistance}
+          onSelect={(value: Distance) => onChangeValue('distance', value)}
           onHide={handleHideDistanceSelect}
         >
           {distanceList.map(distance => (
@@ -147,12 +147,13 @@ function ConcernList({ concernList }: ConcernListProps) {
       </Styled.FilterWrapper>
     ),
     [
-      currentDistance,
+      query,
       distanceTargetRef,
       filterListWrapperRef,
       handleHideDistanceSelect,
       handleShowDistanceSelect,
       showDistanceSelect,
+      onChangeValue,
     ],
   )
 
@@ -166,7 +167,7 @@ function ConcernList({ concernList }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={currentEmotion}
+            value={query.emotion ?? ''}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -181,8 +182,7 @@ function ConcernList({ concernList }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          defaultKey={Emotion.Happy}
-          onSelect={setCurrentEmotion}
+          onSelect={(value: Emotion) => onChangeValue('emotion', value)}
           onHide={handleHideEmotionSelect}
         >
           {emotionList.map(emotion => (
@@ -198,12 +198,13 @@ function ConcernList({ concernList }: ConcernListProps) {
       </Styled.FilterWrapper>
     ),
     [
-      currentEmotion,
+      query,
       emotionTargetRef,
       filterListWrapperRef,
       handleHideEmotionSelect,
       handleShowEmotionSelect,
       showEmotionSelect,
+      onChangeValue,
     ],
   )
 

@@ -18,7 +18,7 @@ function SVGIcon({ className, name, size }: SVGIconProps) {
       return require(`assets/${fileName}`).default
     } catch (e) {
       console.error(
-        `cannot find icon name ${name}. Pleace check again. error message : ${e.message}`,
+        `cannot find icon name ${name}. Please check again. error message : ${e.message}`,
       )
     }
   }, [name])
