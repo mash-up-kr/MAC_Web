@@ -29,6 +29,7 @@ export const BackButton = styled.div`
   top: 50%;
   left: 16px;
   transform: translateY(-50%);
+  cursor: pointer;
 `
 
 export const ConcernCard = styled.div`
