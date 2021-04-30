@@ -121,6 +121,5 @@
         "statements": 90
       }
     }
-  },
-  "proxy": "http://localhost:4000"
+  }
 }
