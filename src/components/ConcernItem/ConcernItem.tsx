@@ -47,7 +47,7 @@ function ConcernItem({ concern }: ConcernItemProps) {
   }, [concern.createdAt])
 
   return (
-    <Styled.ConcernWrapper>
+    <Styled.ConcernWrapper to={`/concern/${concern.id}`}>
       <Styled.CategoryWrapper>
         <SVGIcon name={getConcernItemImageName(concern.category)} size={44} />
         <Styled.Category>{concern.category}</Styled.Category>

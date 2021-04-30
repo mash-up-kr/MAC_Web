@@ -1,10 +1,14 @@
+/* External dependencies */
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-export const ConcernWrapper = styled.div`
+export const ConcernWrapper = styled(Link)`
   display: flex;
   width: 100%;
   padding: 16px 10px;
   box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
 `
