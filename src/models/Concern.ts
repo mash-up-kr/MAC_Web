@@ -15,6 +15,7 @@ export interface ConcernAttrPOJO {
   location: Location
   userId: number
   distance: number
+  commentCount: number
   createdAt: string
   updatedAt: string
   deletedAt: string
@@ -31,6 +32,7 @@ const ConcernRecord = Immutable.Record<ConcernAttr>({
   location: new Location(),
   userId: 0,
   distance: 0,
+  commentCount: 0,
   createdAt: '',
   updatedAt: '',
   deletedAt: '',

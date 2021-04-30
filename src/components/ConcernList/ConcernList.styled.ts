@@ -97,6 +97,7 @@ export const FilterOption = styled(Option)`
 export const ConcernListWrapper = styled.div`
   width: 100%;
   padding: 20px 0;
+  box-sizing: border-box;
 
   ${ConcernWrapper} + ${ConcernWrapper} {
     margin-top: 12px;
