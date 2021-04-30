@@ -20,7 +20,7 @@ class QueryParamService {
   }
 
   hasToken() {
-    return isEmpty(this.token)
+    return !isEmpty(this.token)
   }
 }
 

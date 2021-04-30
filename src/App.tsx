@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useRef } from 'react'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle } from 'global-styles'
 import Routes from 'Routes'
@@ -8,11 +8,8 @@ import Routes from 'Routes'
 import QueryParamService from 'services/QueryParamService'
 
 function App() {
-  const isFulfilled = useRef(false)
-
-  if (!isFulfilled.current) {
+  if (!QueryParamService.hasToken()) {
     QueryParamService.parse()
-    isFulfilled.current = true
   }
 
   return (
