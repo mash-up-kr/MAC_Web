@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getConcernList } from 'modules/reducers/concernReducer'
 import * as concernSelector from 'modules/selectors/concernSelector'
 import Category from 'constants/Category'
-import Distance from 'constants/Distance'
+import Distance, { distanceList } from 'constants/Distance'
 import Emotion from 'constants/Emotion'
 import ConcernList, { Value } from 'components/ConcernList'
 
@@ -22,7 +22,7 @@ function ConcernListContainer() {
 
   const [query, setQuery] = useState<QueryProps>({
     category: undefined,
-    distance: Distance.D3,
+    distance: distanceList[0],
     emotion: undefined,
   })
 
@@ -36,8 +36,8 @@ function ConcernListContainer() {
   useEffect(() => {
     dispatch(
       getConcernList({
-        minKilometer: 0,
-        maxKilometer: query.distance,
+        minKilometer: query.distance.value.minKilometer,
+        maxKilometer: query.distance.value.maxKilometer,
         category: query.category,
         emotion: query.emotion,
       }),

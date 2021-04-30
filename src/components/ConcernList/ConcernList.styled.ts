@@ -8,10 +8,19 @@ interface ArrowIconProps {
   opened: boolean
 }
 
+interface FilterWrapperProps {
+  width: string
+}
+
+interface FilterSelectProps {
+  width: string
+}
+
 export const ConcernListContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 16px;
+  overflow-y: scroll;
 `
 
 export const FilterListWrapper = styled.div`
@@ -21,10 +30,10 @@ export const FilterListWrapper = styled.div`
   width: 100%;
 `
 
-export const FilterWrapper = styled.div`
+export const FilterWrapper = styled.div<FilterWrapperProps>`
   display: flex;
   flex-direction: column;
-  width: 31%;
+  width: ${({ width }) => width};
 `
 
 export const FilterLabel = styled.label`
@@ -67,8 +76,8 @@ export const ArrowIcon = styled(SVGIcon)<ArrowIconProps>`
     `}
 `
 
-export const FilterSelect = styled(Select)`
-  width: 31%;
+export const FilterSelect = styled(Select)<FilterSelectProps>`
+  width: ${({ width }) => width};
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid #aaaaaa;

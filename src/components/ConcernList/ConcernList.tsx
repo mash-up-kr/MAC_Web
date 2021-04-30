@@ -57,7 +57,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
 
   const CategoryFilter = useMemo(
     () => (
-      <Styled.FilterWrapper>
+      <Styled.FilterWrapper width="23%">
         <Styled.FilterLabel>고민</Styled.FilterLabel>
         <Styled.FilterInputWrapper
           ref={setCategoryTargetRef}
@@ -65,7 +65,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={query.category ?? ''}
+            value={query.category ?? '전체'}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -75,6 +75,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           />
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
+          width="23%"
           showSelect={showCategorySelect}
           target={categoryTargetRef}
           container={filterListWrapperRef}
@@ -108,7 +109,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
 
   const DistanceFilter = useMemo(
     () => (
-      <Styled.FilterWrapper>
+      <Styled.FilterWrapper width="47%">
         <Styled.FilterLabel>거리</Styled.FilterLabel>
         <Styled.FilterInputWrapper
           ref={setDistanceTargetRef}
@@ -116,7 +117,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={query.distance ? `${query.distance}km` : ''}
+            value={query.distance.name}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -126,6 +127,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           />
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
+          width="47%"
           showSelect={showDistanceSelect}
           target={distanceTargetRef}
           container={filterListWrapperRef}
@@ -137,10 +139,10 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           {distanceList.map(distance => (
             <Styled.FilterOption
               value={distance}
-              key={distance}
+              key={distance.name}
               optionKey={distance}
             >
-              {distance}
+              {distance.name}
             </Styled.FilterOption>
           ))}
         </Styled.FilterSelect>
@@ -159,7 +161,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
 
   const EmotionFilter = useMemo(
     () => (
-      <Styled.FilterWrapper>
+      <Styled.FilterWrapper width="23%">
         <Styled.FilterLabel>감정</Styled.FilterLabel>
         <Styled.FilterInputWrapper
           ref={setEmotionTargetRef}
@@ -167,7 +169,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
         >
           <Styled.FilterInput
             type="text"
-            value={query.emotion ?? ''}
+            value={query.emotion ?? '전체'}
             readOnly={true}
           />
           <Styled.ArrowIcon
@@ -177,6 +179,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           />
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
+          width="23%"
           showSelect={showEmotionSelect}
           target={emotionTargetRef}
           container={filterListWrapperRef}
@@ -217,8 +220,8 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
   return (
     <Styled.ConcernListContainer>
       <Styled.FilterListWrapper ref={setFilterListWrapperRef}>
-        {CategoryFilter}
         {DistanceFilter}
+        {CategoryFilter}
         {EmotionFilter}
       </Styled.FilterListWrapper>
       <Styled.ConcernListWrapper>{concerns}</Styled.ConcernListWrapper>
