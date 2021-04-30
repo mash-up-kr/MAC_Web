@@ -4,12 +4,17 @@ import ConcernContainer from 'containers/ConcernContainer'
 import { Answer } from 'types/Answer'
 import Answers from 'components/answerlist/Answers'
 
-const Concern = () => (
-  <Layout>
-    <ConcernContainer />
-    <Answers answers={dummy} />
-  </Layout>
-)
+function Concern({ match }) {
+  const { id } = match.params
+
+  return (
+    <Layout>
+      <ConcernContainer concernId={id} />
+      <Answers answers={dummy} />
+    </Layout>
+  )
+}
+
 export default Concern
 
 // dummy

@@ -1,8 +1,41 @@
+/* External dependencies */
 import styled from 'styled-components'
 
+/* Internal dependencies */
+import SVGIcon from 'elements/SVGIcon'
+
+export const ConcernCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+`
+
+export const ConcernCardHeader = styled.div`
+  position: relative;
+  width: 100%;
+  height: 46px;
+  margin-bottom: 14px;
+  line-height: 46px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+`
+
+export const BackButton = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+`
+
 export const ConcernCard = styled.div`
-  width: 300px;
-  height: 435px;
+  display: flex;
+  flex-direction: column;
+  width: 84%;
+  height: 475px;
   background-color: ${props => props.theme.colors.darkGray3};
   border: 1px solid ${props => props.theme.colors.point};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -19,9 +52,12 @@ export const CategoryWrapper = styled.div`
 export const DistanceArea = styled.div`
   font-size: 11px;
   display: flex;
-  flex: 1;
   align-items: center;
   color: ${props => props.theme.colors.gray05};
+`
+
+export const Distance = styled.p`
+  line-height: 24px;
 `
 
 export const CategoryArea = styled.div`
@@ -59,6 +95,10 @@ export const Writer = styled.div`
   color: ${props => props.theme.colors.gray05};
   font-size: 12px;
   margin-top: 8px;
+
+  span {
+    font-weight: bold;
+  }
 `
 
 export const ShareArea = styled.div`
@@ -67,43 +107,58 @@ export const ShareArea = styled.div`
   justify-content: flex-end;
 `
 export const Title = styled.div`
+  max-height: 60px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 18px;
   text-align: center;
 `
 
 export const DividerArea = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10px 0 20px;
+  padding-bottom: 20px;
 `
 export const Divider = styled.div`
   width: 280px;
   border: 1px solid ${props => props.theme.colors.purpleGray};
 `
 export const ContentBox = styled.div`
-  color: #fff;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   padding: 0 16px;
+  overflow: hidden;
+  color: #fff;
 `
 export const Content = styled.div`
+  flex: 1;
+  width: 100%;
+  margin-bottom: 10px;
+  overflow-y: scroll;
   font-weight: normal;
   font-size: 14px;
+  text-align: center;
   line-height: 130%;
 `
 export const LikeButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+  margin-bottom: 16px;
   font-size: 12px;
   width: 80px;
   height: 24px;
   cursor: pointer;
   border-radius: 3px;
   background-color: ${props => props.theme.colors.purpleGray};
-  margin-top: 16px;
 `

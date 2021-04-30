@@ -4,6 +4,7 @@ import { takeLatest } from 'redux-saga/effects'
 
 /* Internal dependencies */
 import Concern, { ConcernAttrPOJO } from 'models/Concern'
+import ConcernDetail, { ConcernDetailAttrPOJO } from 'models/ConcernDetail'
 import * as concernAPI from 'modules/apis/concernAPI'
 import Category from 'constants/Category'
 import Emotion from 'constants/Emotion'
@@ -13,13 +14,19 @@ import {
   createAsyncActionsAndSaga,
 } from 'utils/reduxUtils'
 
-type Action = AsyncActionTypes<typeof getConcernListAsyncActions>
+type Action =
+  | AsyncActionTypes<typeof getConcernListAsyncActions>
+  | AsyncActionTypes<typeof getConcernDetailAsyncActions>
 
 interface State {
   concernList: Immutable.Map<number, Concern>
-  isFetching: boolean
-  hasSuccess: boolean
-  hasError: boolean
+  concernDefail: ConcernDetail
+  isConcernListFetching: boolean
+  hasConcernListSuccess: boolean
+  hasConcernListError: boolean
+  isConcernDetailFetching: boolean
+  hasConcernDetailSuccess: boolean
+  hasConcernDetailError: boolean
 }
 
 export interface GetConcernListPayload {
@@ -29,13 +36,27 @@ export interface GetConcernListPayload {
   emotion?: Emotion
 }
 
+export interface GetConcernDetailPayload {
+  concernId: string
+}
+
 const GET_CONCERN_LIST = 'concern/GET_CONCERN_LIST' as const
 const GET_CONCERN_LIST_FETCHING = 'concern/GET_CONCERN_LIST_FETCHING' as const
 const GET_CONCERN_LIST_SUCCESS = 'concern/GET_CONCERN_LIST_SUCCESS' as const
 const GET_CONCERN_LIST_ERROR = 'concern/GET_CONCERN_LIST_ERROR' as const
 
+const GET_CONCERN_DETAIL = 'concern/GET_CONCERN_DETAIL' as const
+const GET_CONCERN_DETAIL_FETCHING = 'concern/GET_CONCERN_DETAIL_FETCHING' as const
+const GET_CONCERN_DETAIL_SUCCESS = 'concern/GET_CONCERN_DETAIL_SUCCESS' as const
+const GET_CONCERN_DETAIL_ERROR = 'concern/GET_CONCERN_DETAIL_ERROR' as const
+
 export const getConcernList = actionCreator<GetConcernListPayload>(
   GET_CONCERN_LIST,
+  { usePromise: true },
+)
+
+export const getConcernDetail = actionCreator<GetConcernDetailPayload>(
+  GET_CONCERN_DETAIL,
   { usePromise: true },
 )
 
@@ -50,15 +71,31 @@ const {
   concernAPI.getConcernList,
 )
 
+const {
+  asyncActions: getConcernDetailAsyncActions,
+  asyncSaga: getConcernDetailSaga,
+} = createAsyncActionsAndSaga(
+  GET_CONCERN_DETAIL_FETCHING,
+  GET_CONCERN_DETAIL_SUCCESS,
+  GET_CONCERN_DETAIL_ERROR,
+)<ReturnType<typeof getConcernDetail>, ConcernDetailAttrPOJO, any>(
+  concernAPI.getConcernDetail,
+)
+
 export function* concernSaga() {
   yield takeLatest(GET_CONCERN_LIST, getConcernListSaga)
+  yield takeLatest(GET_CONCERN_DETAIL, getConcernDetailSaga)
 }
 
 const initialState: State = {
   concernList: Immutable.Map(),
-  isFetching: false,
-  hasSuccess: false,
-  hasError: false,
+  concernDefail: new ConcernDetail(),
+  isConcernListFetching: false,
+  hasConcernListSuccess: false,
+  hasConcernListError: false,
+  isConcernDetailFetching: false,
+  hasConcernDetailSuccess: false,
+  hasConcernDetailError: false,
 }
 
 function conceruReducer(state: State = initialState, action: Action) {
@@ -67,9 +104,9 @@ function conceruReducer(state: State = initialState, action: Action) {
       return {
         ...state,
         concernList: state.concernList.clear(),
-        isFetching: true,
-        hasSuccess: false,
-        hasError: false,
+        isConcernListFetching: true,
+        hasConcernListSuccess: false,
+        hasConcernListError: false,
       }
     }
     case GET_CONCERN_LIST_SUCCESS: {
@@ -80,15 +117,39 @@ function conceruReducer(state: State = initialState, action: Action) {
             map.set(concern.id, new Concern(concern))
           })
         }),
-        isFetching: false,
-        hasSuccess: true,
+        isConcernListFetching: false,
+        hasConcernListSuccess: true,
       }
     }
     case GET_CONCERN_LIST_ERROR: {
       return {
         ...state,
-        isFetching: false,
-        hasError: true,
+        isConcernListFetching: false,
+        hasConcernListError: true,
+      }
+    }
+    case GET_CONCERN_DETAIL_FETCHING: {
+      return {
+        ...state,
+        concernDefail: state.concernDefail.clear(),
+        isConcernDetailFetching: true,
+        hasConcernDetailSuccess: false,
+        hasConcernDetailError: false,
+      }
+    }
+    case GET_CONCERN_DETAIL_SUCCESS: {
+      return {
+        ...state,
+        concernDefail: new ConcernDetail(action.payload),
+        isConcernDetailFetching: false,
+        hasConcernDetailSuccess: true,
+      }
+    }
+    case GET_CONCERN_DETAIL_ERROR: {
+      return {
+        ...state,
+        isConcernDetailFetching: false,
+        hasConcernDetailError: true,
       }
     }
     default:

@@ -1,56 +1,80 @@
-import React from 'react'
-import * as Styled from './Concern.styled'
-import location from './../../assets/location.svg'
-import share from './../../assets/share.svg'
-import love from './../../assets/love.svg'
-import heart from './../../assets/heart.svg'
-import colors from './../../constants/colors'
-const ConcernCard = () => {
-  return (
-    <Styled.ConcernCard>
-      <Styled.TitleBox>
-        <Styled.CategoryWrapper>
-          <Styled.DistanceArea>
-            <img src={location} alt="location icon" /> 15km
-          </Styled.DistanceArea>
-          <Styled.ShareArea>
-            <img src={share} alt="location icon" />
-          </Styled.ShareArea>
-        </Styled.CategoryWrapper>
-        <Styled.CategoryWrapper>
-          <Styled.CategoryArea>
-            <Styled.AnimalArea>
-              <img src={love} alt="location icon" />
-            </Styled.AnimalArea>
-            <Styled.HashtagArea>
-              <Styled.Hashtag background={colors.yellow}>
-                # 연애고민
-              </Styled.Hashtag>
-              <Styled.Hashtag background={colors.green}># 기쁨</Styled.Hashtag>
-            </Styled.HashtagArea>
-            <Styled.Writer>소양이팀 작성</Styled.Writer>
-          </Styled.CategoryArea>
-        </Styled.CategoryWrapper>
-        <Styled.Title>남자친구의 판도라 상자를 열었따!</Styled.Title>
-      </Styled.TitleBox>
-      <Styled.DividerArea>
-        <Styled.Divider />
-      </Styled.DividerArea>
+/* External dependencies */
+import React, { useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 
-      <Styled.ContentBox>
-        <Styled.Content>
-          남자친구와 만난지 3년이 되어갑니다. 그런데 며칠전 남자친구의 휴대폰을
-          우연히 보게 되었어요... 평소 참 잘해주던 사람인데... 평소 참 잘해주던
-          사람인데... 평소 참 잘해주던 사람인데... 평소 참 잘해주던 사람인데...
-          평소 참 잘해주던 사람인데... 평소 참 잘해주던 사람인데... 평소 참
-          잘해주던 사람인데...
-        </Styled.Content>
-        <Styled.LikeButton>
-          <img src={heart} alt="location icon" />
-          508
-        </Styled.LikeButton>
-      </Styled.ContentBox>
-    </Styled.ConcernCard>
+/* Internal dependencies */
+import ConcernDetail from 'models/ConcernDetail'
+import { getConcernItemImageName } from 'utils/concernUtils'
+import colors from 'constants/colors'
+import SVGIcon from 'elements/SVGIcon'
+import * as Styled from './Concern.styled'
+
+interface ConcernCardProps {
+  concernDetail: ConcernDetail
+}
+
+const ConcernCard = ({ concernDetail }: ConcernCardProps) => {
+  const history = useHistory()
+
+  const handleClickBack = useCallback(() => {
+    history.goBack()
+  }, [history])
+
+  return (
+    <Styled.ConcernCardContainer>
+      <Styled.ConcernCardHeader>
+        <Styled.BackButton onClick={handleClickBack}>
+          <SVGIcon name="arrow-left" size={24} />
+        </Styled.BackButton>
+        고민카드
+      </Styled.ConcernCardHeader>
+      <Styled.ConcernCard>
+        <Styled.TitleBox>
+          <Styled.CategoryWrapper>
+            <Styled.DistanceArea>
+              <SVGIcon name="location" size={24} />
+              <Styled.Distance>15km</Styled.Distance>
+            </Styled.DistanceArea>
+            <Styled.ShareArea>
+              <SVGIcon name="share" size={24} />
+            </Styled.ShareArea>
+          </Styled.CategoryWrapper>
+          <Styled.CategoryWrapper>
+            <Styled.CategoryArea>
+              <Styled.AnimalArea>
+                <SVGIcon
+                  name={getConcernItemImageName(concernDetail.category)}
+                  size={88}
+                />
+              </Styled.AnimalArea>
+              <Styled.HashtagArea>
+                <Styled.Hashtag background={colors.yellow}>
+                  # {concernDetail.category}
+                </Styled.Hashtag>
+                <Styled.Hashtag background={colors.green}>
+                  # {concernDetail.emotion}
+                </Styled.Hashtag>
+              </Styled.HashtagArea>
+              <Styled.Writer>
+                <span>{concernDetail.user.nickname}</span>님 작성
+              </Styled.Writer>
+            </Styled.CategoryArea>
+          </Styled.CategoryWrapper>
+          <Styled.Title>{concernDetail.title}</Styled.Title>
+        </Styled.TitleBox>
+        <Styled.DividerArea>
+          <Styled.Divider />
+        </Styled.DividerArea>
+
+        <Styled.ContentBox>
+          <Styled.Content>{concernDetail.content}</Styled.Content>
+          <Styled.LikeButton>
+            <SVGIcon name="heart" size={24} />
+            508
+          </Styled.LikeButton>
+        </Styled.ContentBox>
+      </Styled.ConcernCard>
+    </Styled.ConcernCardContainer>
   )
 }
 

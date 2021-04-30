@@ -12,7 +12,7 @@ const Routes: FC<RouteComponentProps> = () => {
   return (
     <Switch>
       <Route exact path="/concerns" component={Concerns} />
-      <Route exact path="/concern/:edit" component={Concern} />
+      <Route exact path="/concern/:id" component={Concern} />
     </Switch>
   )
 }

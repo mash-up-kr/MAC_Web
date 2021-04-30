@@ -3,48 +3,40 @@ import Immutable from 'immutable'
 
 /* Internal dependencies */
 import Location from 'models/Location'
+import User from 'models/User'
 import Category, { categoryList } from 'constants/Category'
 import Emotion, { emotionList } from 'constants/Emotion'
 
-export interface ConcernAttrPOJO {
+export interface ConcernDetailAttrPOJO {
   id: number
   title: string
   content: string
   category: Category
   emotion: Emotion
   location: Location
-  userId: number
-  distance: number
-  commentCount: number
-  createdAt: string
-  updatedAt: string
-  deletedAt: string
+  user: User
 }
 
-interface ConcernAttr extends ConcernAttrPOJO {}
+interface ConcernDetailAttr extends ConcernDetailAttrPOJO {}
 
-const ConcernRecord = Immutable.Record<ConcernAttr>({
+const ConcernDetailRecord = Immutable.Record<ConcernDetailAttr>({
   id: 0,
   title: '',
   content: '',
   category: categoryList[0],
   emotion: emotionList[0],
   location: new Location(),
-  userId: 0,
-  distance: 0,
-  commentCount: 0,
-  createdAt: '',
-  updatedAt: '',
-  deletedAt: '',
+  user: new User(),
 })
 
-class Concern extends ConcernRecord {
-  constructor(args: Partial<ConcernAttrPOJO> = {}) {
+class ConcernDetail extends ConcernDetailRecord {
+  constructor(args: Partial<ConcernDetailAttrPOJO> = {}) {
     super({
       ...args,
       location: new Location(args.location),
+      user: new User(args.user),
     })
   }
 }
 
-export default Concern
+export default ConcernDetail
