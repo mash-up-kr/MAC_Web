@@ -10,14 +10,22 @@ import * as Styled from './AnswerList.styled'
 
 interface AnswerListProps {
   answerList: Immutable.List<Answer>
+  onClickLike: (answerId: number, liked: boolean) => void
 }
 
-function AnswerList({ answerList }: AnswerListProps) {
+function AnswerList({ answerList, onClickLike }: AnswerListProps) {
   const [show, setShow] = useState(true)
 
   const handleToggle = useCallback(() => {
     setShow(prev => !prev)
   }, [])
+
+  const handleClickLike = useCallback(
+    (answerId: number, liked: boolean) => {
+      onClickLike(answerId, liked)
+    },
+    [onClickLike],
+  )
 
   return (
     <>
@@ -32,6 +40,15 @@ function AnswerList({ answerList }: AnswerListProps) {
               <Styled.Name>{answer.user.nickname}</Styled.Name>
               <Styled.Content>{answer.content}</Styled.Content>
               <Styled.Date>{getDateString(answer.createdAt)}</Styled.Date>
+              <Styled.LikeButton
+                onClick={() => handleClickLike(answer.id, answer.liked)}
+              >
+                <SVGIcon
+                  name={answer.liked ? 'heart' : 'grayheart'}
+                  size={24}
+                />
+                {answer.likeCount}
+              </Styled.LikeButton>
             </Styled.Answer>
           ))}
           <Styled.TextArea placeholder="당신의 답변은?" />

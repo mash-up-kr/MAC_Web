@@ -66,6 +66,7 @@ export const ToggleButton = styled.div<ToggleButtonProps>`
 `
 
 export const Answer = styled.div`
+  position: relative;
   width: 100%;
   padding: 10px 0;
   color: white;
@@ -94,6 +95,21 @@ export const Content = styled.p`
 export const Date = styled.p`
   color: #716d74;
   font-size: 12px;
+`
+
+export const LikeButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 12px;
+  right: 0;
+  width: 80px;
+  height: 24px;
+  font-size: 12px;
+  background-color: ${props => props.theme.colors.purpleGray};
+  border-radius: 3px;
+  cursor: pointer;
 `
 
 export const TextArea = styled.textarea`
