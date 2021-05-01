@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash-es'
 
 class QueryParamService {
   token: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0fSwiaWF0IjoxNjE5MjE3MDE5LCJleHAiOjE2MTk4MjE4MTl9.pC8Q1LulEoWRDAD8ZnP28uJckzHa2DNpvjtTmyEUyfw'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNjE5ODY1MDY4LCJleHAiOjE2MjA0Njk4Njh9.59VsuvtAXLJi6vR54fZPbw36Ta8CZzWy02p9HI6jgLE'
 
   parse() {
     const { token } = qs.parse(window.location.search, {

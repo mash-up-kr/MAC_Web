@@ -61,6 +61,19 @@ export const Title = styled.p`
   white-space: nowrap;
 `
 
+export const CommentNew = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  background-color: ${({ theme }) => theme.colors.green};
+  font-size: 8px;
+  font-weight: bolder;
+  border-radius: 50%;
+`
+
 export const CommentCount = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.point};

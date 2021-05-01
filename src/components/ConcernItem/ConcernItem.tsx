@@ -22,6 +22,7 @@ function ConcernItem({ concern }: ConcernItemProps) {
       <Styled.ContentWrapper>
         <Styled.TitleHeader>
           <Styled.Title>{concern.title}</Styled.Title>
+          {concern.isNew && <Styled.CommentNew>N</Styled.CommentNew>}
           <Styled.CommentCount>
             답변 <span>{concern.commentCount}</span>
           </Styled.CommentCount>

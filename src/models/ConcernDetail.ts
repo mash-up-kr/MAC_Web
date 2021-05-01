@@ -15,6 +15,9 @@ export interface ConcernDetailAttrPOJO {
   emotion: Emotion
   location: Location
   user: User
+  likeCount: number
+  liked: boolean
+  isNew: boolean
 }
 
 interface ConcernDetailAttr extends ConcernDetailAttrPOJO {}
@@ -27,6 +30,9 @@ const ConcernDetailRecord = Immutable.Record<ConcernDetailAttr>({
   emotion: emotionList[0],
   location: new Location(),
   user: new User(),
+  likeCount: 0,
+  liked: false,
+  isNew: false,
 })
 
 class ConcernDetail extends ConcernDetailRecord {

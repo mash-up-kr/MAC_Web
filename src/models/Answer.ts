@@ -10,6 +10,9 @@ export interface AnswerPOJO {
   userId: number
   counselingQuestionId: number
   user: User
+  likeCount: number
+  liked: boolean
+  isNew: boolean
   createdAt: string
   updatedAt: string
   deletedAt: string | null
@@ -23,6 +26,9 @@ const AnswerRecord = Immutable.Record<AnswerAttr>({
   userId: 0,
   counselingQuestionId: 0,
   user: new User(),
+  likeCount: 0,
+  liked: false,
+  isNew: false,
   createdAt: '',
   updatedAt: '',
   deletedAt: '',

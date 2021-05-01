@@ -16,9 +16,12 @@ export interface ConcernAttrPOJO {
   userId: number
   distance: number
   commentCount: number
+  likeCount: number
+  liked: boolean
+  isNew: boolean
   createdAt: string
   updatedAt: string
-  deletedAt: string
+  deletedAt: string | null
 }
 
 interface ConcernAttr extends ConcernAttrPOJO {}
@@ -33,9 +36,12 @@ const ConcernRecord = Immutable.Record<ConcernAttr>({
   userId: 0,
   distance: 0,
   commentCount: 0,
+  likeCount: 0,
+  liked: false,
+  isNew: false,
   createdAt: '',
   updatedAt: '',
-  deletedAt: '',
+  deletedAt: null,
 })
 
 class Concern extends ConcernRecord {

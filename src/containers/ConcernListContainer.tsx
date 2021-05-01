@@ -35,7 +35,6 @@ function ConcernListContainer() {
   }, [dispatch])
 
   useEffect(() => {
-    console.log(query)
     dispatch(
       getConcernList({
         minKilometer: query.distance.value.minKilometer,

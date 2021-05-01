@@ -70,7 +70,7 @@ const ConcernCard = ({ concernDetail }: ConcernCardProps) => {
           <Styled.Content>{concernDetail.content}</Styled.Content>
           <Styled.LikeButton>
             <SVGIcon name="heart" size={24} />
-            508
+            {concernDetail.likeCount}
           </Styled.LikeButton>
         </Styled.ContentBox>
       </Styled.ConcernCard>
