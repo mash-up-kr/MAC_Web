@@ -1,9 +1,13 @@
 /* External dependencies */
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 /* Internal dependencies */
-import { getConcernDetail } from 'modules/reducers/concernReducer'
+import {
+  getConcernDetail,
+  postConcerkLike,
+  deleteConcerkLike,
+} from 'modules/reducers/concernReducer'
 import { getAnswerList } from 'modules/reducers/answerReducer'
 import * as concernSelector from 'modules/selectors/concernSelector'
 import * as answerSelector from 'modules/selectors/answerSelector'
@@ -19,6 +23,16 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
   const concernDetail = useSelector(concernSelector.getConcernDetail)
   const answerList = useSelector(answerSelector.getAnswerList)
 
+  const handleClickLike = useCallback(() => {
+    const actionCreator = concernDetail.liked
+      ? deleteConcerkLike
+      : postConcerkLike
+
+    dispatch(actionCreator({ concernId })).promise?.then(() => {
+      dispatch(getConcernDetail({ concernId }))
+    })
+  }, [concernDetail.liked, concernId, dispatch])
+
   useEffect(() => {
     dispatch(getConcernDetail({ concernId }))
   }, [concernId, dispatch])
@@ -29,7 +43,10 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
 
   return (
     <>
-      <ConcernCard concernDetail={concernDetail} />
+      <ConcernCard
+        concernDetail={concernDetail}
+        onClickLike={handleClickLike}
+      />
       <AnswerList answerList={answerList} />
     </>
   )

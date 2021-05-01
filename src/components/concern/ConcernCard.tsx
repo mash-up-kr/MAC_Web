@@ -11,9 +11,10 @@ import * as Styled from './Concern.styled'
 
 interface ConcernCardProps {
   concernDetail: ConcernDetail
+  onClickLike: () => void
 }
 
-const ConcernCard = ({ concernDetail }: ConcernCardProps) => {
+const ConcernCard = ({ concernDetail, onClickLike }: ConcernCardProps) => {
   const history = useHistory()
 
   const handleClickBack = useCallback(() => {
@@ -68,8 +69,11 @@ const ConcernCard = ({ concernDetail }: ConcernCardProps) => {
 
         <Styled.ContentBox>
           <Styled.Content>{concernDetail.content}</Styled.Content>
-          <Styled.LikeButton>
-            <SVGIcon name="heart" size={24} />
+          <Styled.LikeButton onClick={onClickLike}>
+            <SVGIcon
+              name={concernDetail.liked ? 'heart' : 'grayheart'}
+              size={24}
+            />
             {concernDetail.likeCount}
           </Styled.LikeButton>
         </Styled.ContentBox>

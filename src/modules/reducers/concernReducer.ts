@@ -17,6 +17,8 @@ import {
 type Action =
   | AsyncActionTypes<typeof getConcernListAsyncActions>
   | AsyncActionTypes<typeof getConcernDetailAsyncActions>
+  | AsyncActionTypes<typeof postConcernLikeAsyncActions>
+  | AsyncActionTypes<typeof deleteConcernLikeAsyncActions>
 
 interface State {
   concernList: Immutable.Map<number, Concern>
@@ -40,6 +42,14 @@ export interface GetConcernDetailPayload {
   concernId: string
 }
 
+export interface PostConcernLikePayload {
+  concernId: string
+}
+
+export interface DeleteConcernLikePayload {
+  concernId: string
+}
+
 const GET_CONCERN_LIST = 'concern/GET_CONCERN_LIST' as const
 const GET_CONCERN_LIST_FETCHING = 'concern/GET_CONCERN_LIST_FETCHING' as const
 const GET_CONCERN_LIST_SUCCESS = 'concern/GET_CONCERN_LIST_SUCCESS' as const
@@ -50,6 +60,16 @@ const GET_CONCERN_DETAIL_FETCHING = 'concern/GET_CONCERN_DETAIL_FETCHING' as con
 const GET_CONCERN_DETAIL_SUCCESS = 'concern/GET_CONCERN_DETAIL_SUCCESS' as const
 const GET_CONCERN_DETAIL_ERROR = 'concern/GET_CONCERN_DETAIL_ERROR' as const
 
+const POST_CONCERN_LIKE = 'concern/POST_CONCERN_LIKE' as const
+const POST_CONCERN_LIKE_FETCHING = 'concern/POST_CONCERN_LIKE_FETCHING' as const
+const POST_CONCERN_LIKE_SUCCESS = 'concern/POST_CONCERN_LIKE_SUCCESS' as const
+const POST_CONCERN_LIKE_ERROR = 'concern/POST_CONCERN_LIKE_ERROR' as const
+
+const DELETE_CONCERN_LIKE = 'concern/DELETE_CONCERN_LIKE' as const
+const DELETE_CONCERN_LIKE_FETCHING = 'concern/DELETE_CONCERN_LIKE_FETCHING' as const
+const DELETE_CONCERN_LIKE_SUCCESS = 'concern/DELETE_CONCERN_LIKE_SUCCESS' as const
+const DELETE_CONCERN_LIKE_ERROR = 'concern/DELETE_CONCERN_LIKE_ERROR' as const
+
 export const getConcernList = actionCreator<GetConcernListPayload>(
   GET_CONCERN_LIST,
   { usePromise: true },
@@ -57,6 +77,16 @@ export const getConcernList = actionCreator<GetConcernListPayload>(
 
 export const getConcernDetail = actionCreator<GetConcernDetailPayload>(
   GET_CONCERN_DETAIL,
+  { usePromise: true },
+)
+
+export const postConcerkLike = actionCreator<PostConcernLikePayload>(
+  POST_CONCERN_LIKE,
+  { usePromise: true },
+)
+
+export const deleteConcerkLike = actionCreator<DeleteConcernLikePayload>(
+  DELETE_CONCERN_LIKE,
   { usePromise: true },
 )
 
@@ -82,9 +112,29 @@ const {
   concernAPI.getConcernDetail,
 )
 
+const {
+  asyncActions: postConcernLikeAsyncActions,
+  asyncSaga: postConcernLikeSaga,
+} = createAsyncActionsAndSaga(
+  POST_CONCERN_LIKE_FETCHING,
+  POST_CONCERN_LIKE_SUCCESS,
+  POST_CONCERN_LIKE_ERROR,
+)<ReturnType<typeof postConcerkLike>, any, any>(concernAPI.postConcernLike)
+
+const {
+  asyncActions: deleteConcernLikeAsyncActions,
+  asyncSaga: deleteConcernLikeSaga,
+} = createAsyncActionsAndSaga(
+  DELETE_CONCERN_LIKE_FETCHING,
+  DELETE_CONCERN_LIKE_SUCCESS,
+  DELETE_CONCERN_LIKE_ERROR,
+)<ReturnType<typeof postConcerkLike>, any, any>(concernAPI.deleteConcernLike)
+
 export function* concernSaga() {
   yield takeLatest(GET_CONCERN_LIST, getConcernListSaga)
   yield takeLatest(GET_CONCERN_DETAIL, getConcernDetailSaga)
+  yield takeLatest(POST_CONCERN_LIKE, postConcernLikeSaga)
+  yield takeLatest(DELETE_CONCERN_LIKE, deleteConcernLikeSaga)
 }
 
 const initialState: State = {
@@ -131,7 +181,6 @@ function conceruReducer(state: State = initialState, action: Action) {
     case GET_CONCERN_DETAIL_FETCHING: {
       return {
         ...state,
-        concernDefail: state.concernDefail.clear(),
         isConcernDetailFetching: true,
         hasConcernDetailSuccess: false,
         hasConcernDetailError: false,
