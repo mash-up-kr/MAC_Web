@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import Immutable from 'immutable'
 
 /* Internal dependencies */
@@ -18,10 +18,16 @@ export type Value = Category | Distance | Emotion
 interface ConcernListProps {
   concernList: Immutable.List<Concern>
   query: QueryProps
-  onChangeValue: (key: string, value: Value) => void
+  onChangeQuery: (key: string, value: Value) => void
+  onClearQuery: () => void
 }
 
-function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
+function ConcernList({
+  concernList,
+  query,
+  onChangeQuery,
+  onClearQuery,
+}: ConcernListProps) {
   const [
     filterListWrapperRef,
     setFilterListWrapperRef,
@@ -56,6 +62,17 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
     handleHideEmotionSelect,
   ] = useIsShow(false)
 
+  const handleChangeQuery = useCallback(
+    (key: string, value: Value) => {
+      onChangeQuery(key, value)
+    },
+    [onChangeQuery],
+  )
+
+  const handleClearQuery = useCallback(() => {
+    onClearQuery()
+  }, [onClearQuery])
+
   const CategoryFilter = useMemo(
     () => (
       <Styled.FilterWrapper width="23%">
@@ -72,7 +89,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           <Styled.IconWrapper>
             <Styled.ArrowIcon
               name="small-arrow"
-              size={18}
+              size={12}
               opened={showCategorySelect}
             />
           </Styled.IconWrapper>
@@ -84,7 +101,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          onSelect={(value: Category) => onChangeValue('category', value)}
+          onSelect={(value: Category) => handleChangeQuery('category', value)}
           onHide={handleHideCategorySelect}
         >
           {categoryList.map(category => (
@@ -106,7 +123,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
       handleHideCategorySelect,
       handleShowCategorySelect,
       showCategorySelect,
-      onChangeValue,
+      handleChangeQuery,
     ],
   )
 
@@ -126,7 +143,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           <Styled.IconWrapper>
             <Styled.ArrowIcon
               name="small-arrow"
-              size={18}
+              size={12}
               opened={showDistanceSelect}
             />
           </Styled.IconWrapper>
@@ -138,7 +155,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          onSelect={(value: Distance) => onChangeValue('distance', value)}
+          onSelect={(value: Distance) => handleChangeQuery('distance', value)}
           onHide={handleHideDistanceSelect}
         >
           {distanceList.map(distance => (
@@ -160,7 +177,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
       handleHideDistanceSelect,
       handleShowDistanceSelect,
       showDistanceSelect,
-      onChangeValue,
+      handleChangeQuery,
     ],
   )
 
@@ -180,7 +197,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           <Styled.IconWrapper>
             <Styled.ArrowIcon
               name="small-arrow"
-              size={18}
+              size={12}
               opened={showEmotionSelect}
             />
           </Styled.IconWrapper>
@@ -192,7 +209,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           container={filterListWrapperRef}
           marginY={4}
           marginX={1}
-          onSelect={(value: Emotion) => onChangeValue('emotion', value)}
+          onSelect={(value: Emotion) => handleChangeQuery('emotion', value)}
           onHide={handleHideEmotionSelect}
         >
           {emotionList.map(emotion => (
@@ -214,7 +231,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
       handleHideEmotionSelect,
       handleShowEmotionSelect,
       showEmotionSelect,
-      onChangeValue,
+      handleChangeQuery,
     ],
   )
 
@@ -237,7 +254,7 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
           <Styled.HeaderMenuItem>
             <SVGIcon name="map" size={24} />
           </Styled.HeaderMenuItem>
-          <Styled.HeaderMenuItem>
+          <Styled.HeaderMenuItem onClick={handleClearQuery}>
             <SVGIcon name="refresh" size={24} />
           </Styled.HeaderMenuItem>
         </Styled.HeaderRightMenu>

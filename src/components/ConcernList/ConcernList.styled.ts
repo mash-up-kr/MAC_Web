@@ -108,6 +108,9 @@ export const FilterInput = styled.input`
 `
 
 export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18px;
   height: 18px;
 `

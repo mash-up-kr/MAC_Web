@@ -1,12 +1,14 @@
 /* External dependencies */
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 /* Internal dependencies */
 import { getConcernList } from 'modules/reducers/concernReducer'
+import { setQuery, clearQuery } from 'modules/reducers/queryReducer'
 import * as concernSelector from 'modules/selectors/concernSelector'
+import * as querySelector from 'modules/selectors/querySelector'
 import Category from 'constants/Category'
-import Distance, { distanceList } from 'constants/Distance'
+import Distance from 'constants/Distance'
 import Emotion from 'constants/Emotion'
 import ConcernList, { Value } from 'components/ConcernList'
 
@@ -19,21 +21,21 @@ export interface QueryProps {
 function ConcernListContainer() {
   const dispatch = useDispatch()
   const concernList = useSelector(concernSelector.getConcernList)
+  const query = useSelector(querySelector.getQuery)
 
-  const [query, setQuery] = useState<QueryProps>({
-    category: undefined,
-    distance: distanceList[0],
-    emotion: undefined,
-  })
+  const handleChangeQuery = useCallback(
+    (key: string, value: Value) => {
+      dispatch(setQuery({ key, value }))
+    },
+    [dispatch],
+  )
 
-  const handleChangeValue = useCallback((key: string, value: Value) => {
-    setQuery(query => ({
-      ...query,
-      [key]: value,
-    }))
-  }, [])
+  const handleClearQuery = useCallback(() => {
+    dispatch(clearQuery())
+  }, [dispatch])
 
   useEffect(() => {
+    console.log(query)
     dispatch(
       getConcernList({
         minKilometer: query.distance.value.minKilometer,
@@ -48,7 +50,8 @@ function ConcernListContainer() {
     <ConcernList
       concernList={concernList}
       query={query}
-      onChangeValue={handleChangeValue}
+      onChangeQuery={handleChangeQuery}
+      onClearQuery={handleClearQuery}
     />
   )
 }
