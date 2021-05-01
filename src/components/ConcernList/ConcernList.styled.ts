@@ -30,6 +30,7 @@ export const ConcernListHeader = styled.div`
   width: 100%;
   height: 46px;
   margin-bottom: 16px;
+  overflow: hidden;
 `
 
 export const HeaderMenuItem = styled.div`
@@ -58,8 +59,12 @@ export const HeaderRightMenu = styled.div`
 `
 
 export const HeaderLocationName = styled.p`
+  max-width: 80%;
   margin-left: 8px;
   color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 16px;
   font-weight: bold;
 `

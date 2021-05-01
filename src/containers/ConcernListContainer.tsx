@@ -2,6 +2,7 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
+import { isString } from 'lodash'
 
 /* Internal dependencies */
 import { getConcernList } from 'modules/reducers/concernReducer'
@@ -57,8 +58,10 @@ function ConcernListContainer() {
           Authorization: `Bearer ${QueryParamService.getToken()}`,
         },
       })
-      .then(({ data }) => {
-        setAddress(data)
+      .then(({ data: { data } }) => {
+        if (isString(data)) {
+          setAddress(data)
+        }
       })
   }, [])
 
