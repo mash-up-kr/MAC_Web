@@ -162,7 +162,7 @@ function conceruReducer(state: State = initialState, action: Action) {
     case GET_CONCERN_LIST_SUCCESS: {
       return {
         ...state,
-        concernList: state.concernList.withMutations(map => {
+        concernList: state.concernList.clear().withMutations(map => {
           action.payload.forEach((concern: ConcernAttrPOJO) => {
             map.set(concern.id, new Concern(concern))
           })

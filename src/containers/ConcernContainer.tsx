@@ -10,6 +10,7 @@ import {
 } from 'modules/reducers/concernReducer'
 import {
   getAnswerList,
+  postAnswer,
   postAnswerLike,
   deleteAnswerLike,
 } from 'modules/reducers/answerReducer'
@@ -48,6 +49,15 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
     [concernId, dispatch],
   )
 
+  const handleCreateAnswer = useCallback(
+    (content: string) => {
+      dispatch(postAnswer({ concernId, content })).promise?.then(() => {
+        dispatch(getAnswerList({ concernId }))
+      })
+    },
+    [concernId, dispatch],
+  )
+
   useEffect(() => {
     dispatch(getConcernDetail({ concernId }))
   }, [concernId, dispatch])
@@ -62,7 +72,11 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
         concernDetail={concernDetail}
         onClickLike={handleClickConcernLike}
       />
-      <AnswerList answerList={answerList} onClickLike={handleClickAnswerLike} />
+      <AnswerList
+        answerList={answerList}
+        onClickLike={handleClickAnswerLike}
+        onCreateAnswer={handleCreateAnswer}
+      />
     </>
   )
 }

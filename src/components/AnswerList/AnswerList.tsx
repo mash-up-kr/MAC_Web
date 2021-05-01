@@ -1,6 +1,7 @@
 /* External dependencies */
 import React, { useState, useCallback } from 'react'
 import Immutable from 'immutable'
+import { isEmpty } from 'lodash-es'
 
 /* Internal dependencies */
 import Answer from 'models/Answer'
@@ -11,10 +12,16 @@ import * as Styled from './AnswerList.styled'
 interface AnswerListProps {
   answerList: Immutable.List<Answer>
   onClickLike: (answerId: number, liked: boolean) => void
+  onCreateAnswer: (content: string) => void
 }
 
-function AnswerList({ answerList, onClickLike }: AnswerListProps) {
+function AnswerList({
+  answerList,
+  onClickLike,
+  onCreateAnswer,
+}: AnswerListProps) {
   const [show, setShow] = useState(true)
+  const [value, setValue] = useState('')
 
   const handleToggle = useCallback(() => {
     setShow(prev => !prev)
@@ -26,6 +33,21 @@ function AnswerList({ answerList, onClickLike }: AnswerListProps) {
     },
     [onClickLike],
   )
+
+  const handleChangeValue = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const { value } = event.target
+      setValue(value)
+    },
+    [],
+  )
+
+  const handleCreateAnswer = useCallback(() => {
+    if (!isEmpty(value)) {
+      onCreateAnswer(value)
+      setValue('')
+    }
+  }, [onCreateAnswer, value])
 
   return (
     <>
@@ -51,8 +73,15 @@ function AnswerList({ answerList, onClickLike }: AnswerListProps) {
               </Styled.LikeButton>
             </Styled.Answer>
           ))}
-          <Styled.TextArea placeholder="당신의 답변은?" />
+          <Styled.TextArea
+            placeholder="당신의 답변은?"
+            value={value}
+            onChange={handleChangeValue}
+          />
         </Styled.AnswerList>
+        <Styled.SubmitButton onClick={handleCreateAnswer}>
+          작성 완료
+        </Styled.SubmitButton>
       </Styled.AnswerListContainer>
     </>
   )

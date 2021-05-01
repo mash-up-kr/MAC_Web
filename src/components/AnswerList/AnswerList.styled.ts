@@ -33,14 +33,25 @@ export const AnswerListBackground = styled.div<AnswerListBackgroundProps>`
 `
 
 export const AnswerListContainer = styled.div<AnswerListContainerProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   bottom: 0;
   width: 100%;
   height: calc(100% - 132px);
+  overflow-y: scroll;
   background-color: #423374;
   transform: translateY(calc(100% - 30px));
   transition: transform 0.3s;
   border-radius: 30px 30px 0 0;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   ${({ show }) =>
     show &&
@@ -53,9 +64,14 @@ export const ToggleButton = styled.div<ToggleButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 30px;
+  min-height: 30px;
   transform: rotate(-180deg);
+  background-color: #423374;
+  z-index: 1000;
   cursor: pointer;
 
   ${({ show }) =>
@@ -124,4 +140,19 @@ export const TextArea = styled.textarea`
   color: white;
   border: 1px solid ${({ theme }) => theme.colors.purpleGray};
   border-radius: 4px;
+`
+
+export const SubmitButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  min-height: 52px;
+  margin-top: auto;
+  background-color: ${({ theme }) => theme.colors.point};
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 `

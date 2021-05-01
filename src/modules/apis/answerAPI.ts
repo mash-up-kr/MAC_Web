@@ -4,6 +4,7 @@ import axios from 'axios'
 /* Internal dependencies */
 import {
   GetAnswerListPayload,
+  PostAnswerPayload,
   PostAnswerLikePayload,
   DeleteAnswerLikePayload,
 } from 'modules/reducers/answerReducer'
@@ -17,6 +18,21 @@ export const getAnswerList: ResponseType<AnswerPOJO[]> = ({
 }: GetAnswerListPayload) => {
   return axios.get(
     `${getRequestUrl()}/api/v1/counselings/${concernId}/comments`,
+    {
+      headers: {
+        Authorization: `Bearer ${QueryParamService.getToken()}`,
+      },
+    },
+  )
+}
+
+export const postAnswer: ResponseType<AnswerPOJO> = ({
+  concernId,
+  content,
+}: PostAnswerPayload) => {
+  return axios.post(
+    `${getRequestUrl()}/api/v1/counselings/${concernId}/comments`,
+    { content },
     {
       headers: {
         Authorization: `Bearer ${QueryParamService.getToken()}`,
