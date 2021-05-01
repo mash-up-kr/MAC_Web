@@ -20,7 +20,7 @@ function AnswerList({
   onClickLike,
   onCreateAnswer,
 }: AnswerListProps) {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const [value, setValue] = useState('')
 
   const handleToggle = useCallback(() => {
