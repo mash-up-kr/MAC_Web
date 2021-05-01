@@ -51,7 +51,6 @@ function ConcernListContainer() {
   }, [dispatch, query])
 
   useEffect(() => {
-    console.log(QueryParamService.getToken())
     axios
       .get(`${getRequestUrl()}/api/v1/users/address`, {
         headers: {

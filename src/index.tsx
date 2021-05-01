@@ -18,6 +18,8 @@ const theme = {
   media,
 }
 
+console.log('v1.0.0')
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={ReduxStore.getStore()}>
