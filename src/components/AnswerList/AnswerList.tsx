@@ -14,7 +14,6 @@ interface AnswerListProps {
 
 function AnswerList({ answerList }: AnswerListProps) {
   const [show, setShow] = useState(true)
-  const [value, setvalue] = useState('')
 
   const handleToggle = useCallback(() => {
     setShow(prev => !prev)

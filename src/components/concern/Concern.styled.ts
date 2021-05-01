@@ -1,9 +1,6 @@
 /* External dependencies */
 import styled from 'styled-components'
 
-/* Internal dependencies */
-import SVGIcon from 'elements/SVGIcon'
-
 export const ConcernCardContainer = styled.div`
   display: flex;
   flex-direction: column;
