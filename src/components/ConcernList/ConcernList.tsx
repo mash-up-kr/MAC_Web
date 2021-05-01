@@ -10,6 +10,7 @@ import Distance, { distanceList } from 'constants/Distance'
 import Emotion, { emotionList } from 'constants/Emotion'
 import { QueryProps } from 'containers/ConcernListContainer'
 import ConcernItem from 'components/ConcernItem'
+import SVGIcon from 'elements/SVGIcon'
 import * as Styled from './ConcernList.styled'
 
 export type Value = Category | Distance | Emotion
@@ -68,11 +69,13 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
             value={query.category ?? '전체'}
             readOnly={true}
           />
-          <Styled.ArrowIcon
-            name="small-arrow"
-            size={18}
-            opened={showCategorySelect}
-          />
+          <Styled.IconWrapper>
+            <Styled.ArrowIcon
+              name="small-arrow"
+              size={18}
+              opened={showCategorySelect}
+            />
+          </Styled.IconWrapper>
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
           width="23%"
@@ -120,11 +123,13 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
             value={query.distance.name}
             readOnly={true}
           />
-          <Styled.ArrowIcon
-            name="small-arrow"
-            size={18}
-            opened={showDistanceSelect}
-          />
+          <Styled.IconWrapper>
+            <Styled.ArrowIcon
+              name="small-arrow"
+              size={18}
+              opened={showDistanceSelect}
+            />
+          </Styled.IconWrapper>
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
           width="47%"
@@ -172,11 +177,13 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
             value={query.emotion ?? '전체'}
             readOnly={true}
           />
-          <Styled.ArrowIcon
-            name="small-arrow"
-            size={18}
-            opened={showEmotionSelect}
-          />
+          <Styled.IconWrapper>
+            <Styled.ArrowIcon
+              name="small-arrow"
+              size={18}
+              opened={showEmotionSelect}
+            />
+          </Styled.IconWrapper>
         </Styled.FilterInputWrapper>
         <Styled.FilterSelect
           width="23%"
@@ -219,6 +226,22 @@ function ConcernList({ concernList, query, onChangeValue }: ConcernListProps) {
 
   return (
     <Styled.ConcernListContainer>
+      <Styled.ConcernListHeader>
+        <Styled.HeaderLeftMenu>
+          <Styled.HeaderMenuItem>
+            <SVGIcon name="header-location" size={24} />
+          </Styled.HeaderMenuItem>
+          <Styled.HeaderLocationName>서울시 송파구</Styled.HeaderLocationName>
+        </Styled.HeaderLeftMenu>
+        <Styled.HeaderRightMenu>
+          <Styled.HeaderMenuItem>
+            <SVGIcon name="map" size={24} />
+          </Styled.HeaderMenuItem>
+          <Styled.HeaderMenuItem>
+            <SVGIcon name="refresh" size={24} />
+          </Styled.HeaderMenuItem>
+        </Styled.HeaderRightMenu>
+      </Styled.ConcernListHeader>
       <Styled.FilterListWrapper ref={setFilterListWrapperRef}>
         {DistanceFilter}
         {CategoryFilter}

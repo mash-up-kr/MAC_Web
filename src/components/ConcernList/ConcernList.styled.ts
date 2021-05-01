@@ -23,6 +23,47 @@ export const ConcernListContainer = styled.div`
   overflow-y: scroll;
 `
 
+export const ConcernListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 46px;
+  margin-bottom: 16px;
+`
+
+export const HeaderMenuItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: ${({ theme }) => theme.colors.point};
+  border-radius: 50%;
+  cursor: pointer;
+`
+
+export const HeaderLeftMenu = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const HeaderRightMenu = styled.div`
+  display: flex;
+  align-items: center;
+
+  ${HeaderMenuItem} + ${HeaderMenuItem} {
+    margin-left: 12px;
+  }
+`
+
+export const HeaderLocationName = styled.p`
+  margin-left: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+`
+
 export const FilterListWrapper = styled.div`
   position: relative;
   display: flex;
@@ -64,6 +105,11 @@ export const FilterInput = styled.input`
   color: ${({ theme }) => theme.colors.gray11};
   border: 0;
   cursor: pointer;
+`
+
+export const IconWrapper = styled.div`
+  width: 18px;
+  height: 18px;
 `
 
 export const ArrowIcon = styled(SVGIcon)<ArrowIconProps>`
