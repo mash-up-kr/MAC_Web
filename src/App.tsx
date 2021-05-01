@@ -1,6 +1,6 @@
 /* External dependencies */
-import React from 'react'
-import { BrowserRouter, useHistory, useLocation } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle } from 'global-styles'
 import Routes from 'Routes'
 
@@ -8,12 +8,11 @@ import Routes from 'Routes'
 import QueryParamService from 'services/QueryParamService'
 
 function Initializer() {
-  const history = useHistory()
-  const location = useLocation()
+  const isFulfilled = useRef(false)
 
-  if (!QueryParamService.hasToken()) {
+  if (!QueryParamService.hasToken() && !isFulfilled.current) {
     QueryParamService.parse()
-    history.replace(location.pathname)
+    isFulfilled.current = true
   }
 
   return null
