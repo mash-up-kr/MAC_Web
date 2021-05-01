@@ -14,6 +14,7 @@ export function getConcernItemImageName(category: Category) {
     case Category.Food:
       return 'food'
     case Category.Etc:
+    default:
       return 'etc'
   }
 }

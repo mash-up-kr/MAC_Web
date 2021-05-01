@@ -92,7 +92,7 @@ export const Content = styled.p`
 `
 
 export const Date = styled.p`
-  color: #716D74;
+  color: #716d74;
   font-size: 12px;
 `
 
