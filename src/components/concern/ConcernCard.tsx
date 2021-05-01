@@ -34,7 +34,9 @@ const ConcernCard = ({ concernDetail, onClickLike }: ConcernCardProps) => {
           <Styled.CategoryWrapper>
             <Styled.DistanceArea>
               <SVGIcon name="location" size={24} />
-              <Styled.Distance>15km</Styled.Distance>
+              <Styled.Distance>
+                {Math.round(concernDetail.distance)}km
+              </Styled.Distance>
             </Styled.DistanceArea>
             <Styled.ShareArea>
               <SVGIcon name="share" size={24} />

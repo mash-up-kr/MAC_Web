@@ -18,6 +18,7 @@ export type Value = Category | Distance | Emotion
 interface ConcernListProps {
   concernList: Immutable.List<Concern>
   query: QueryProps
+  address: string
   onChangeQuery: (key: string, value: Value) => void
   onClearQuery: () => void
 }
@@ -25,6 +26,7 @@ interface ConcernListProps {
 function ConcernList({
   concernList,
   query,
+  address,
   onChangeQuery,
   onClearQuery,
 }: ConcernListProps) {
@@ -248,7 +250,7 @@ function ConcernList({
           <Styled.HeaderMenuItem>
             <SVGIcon name="header-location" size={24} />
           </Styled.HeaderMenuItem>
-          <Styled.HeaderLocationName>서울시 송파구</Styled.HeaderLocationName>
+          <Styled.HeaderLocationName>{address}</Styled.HeaderLocationName>
         </Styled.HeaderLeftMenu>
         <Styled.HeaderRightMenu>
           <Styled.HeaderMenuItem>

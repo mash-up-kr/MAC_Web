@@ -15,6 +15,7 @@ export interface ConcernDetailAttrPOJO {
   emotion: Emotion
   location: Location
   user: User
+  distance: number
   likeCount: number
   liked: boolean
   isNew: boolean
@@ -30,6 +31,7 @@ const ConcernDetailRecord = Immutable.Record<ConcernDetailAttr>({
   emotion: emotionList[0],
   location: new Location(),
   user: new User(),
+  distance: 0,
   likeCount: 0,
   liked: false,
   isNew: false,

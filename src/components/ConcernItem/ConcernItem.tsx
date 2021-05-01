@@ -3,6 +3,7 @@ import React from 'react'
 
 /* Internal dependencies */
 import Concern from 'models/Concern'
+import QueryParamService from 'services/QueryParamService'
 import { getConcernItemImageName } from 'utils/concernUtils'
 import { getDateString } from 'utils/dateUtils'
 import SVGIcon from 'elements/SVGIcon'
@@ -14,7 +15,9 @@ interface ConcernItemProps {
 
 function ConcernItem({ concern }: ConcernItemProps) {
   return (
-    <Styled.ConcernWrapper to={`/concern/${concern.id}`}>
+    <Styled.ConcernWrapper
+      to={`/concern/${concern.id}?token=${QueryParamService.getToken()}`}
+    >
       <Styled.CategoryWrapper>
         <SVGIcon name={getConcernItemImageName(concern.category)} size={44} />
         <Styled.Category>{concern.category}</Styled.Category>
