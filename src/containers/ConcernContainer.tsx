@@ -27,6 +27,9 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
   const dispatch = useDispatch()
   const concernDetail = useSelector(concernSelector.getConcernDetail)
   const answerList = useSelector(answerSelector.getAnswerList)
+  const { prevConcernIndex, nextConcernIndex } = useSelector(
+    concernSelector.getPrevNextConcern,
+  )
 
   const handleClickConcernLike = useCallback(() => {
     const actionCreator = concernDetail.liked

@@ -22,7 +22,7 @@ type Action =
 
 interface State {
   concernList: Immutable.Map<number, Concern>
-  concernDefail: ConcernDetail
+  concernDetail: ConcernDetail
   isConcernListFetching: boolean
   hasConcernListSuccess: boolean
   hasConcernListError: boolean
@@ -139,7 +139,7 @@ export function* concernSaga() {
 
 const initialState: State = {
   concernList: Immutable.Map(),
-  concernDefail: new ConcernDetail(),
+  concernDetail: new ConcernDetail(),
   isConcernListFetching: false,
   hasConcernListSuccess: false,
   hasConcernListError: false,
@@ -189,7 +189,7 @@ function conceruReducer(state: State = initialState, action: Action) {
     case GET_CONCERN_DETAIL_SUCCESS: {
       return {
         ...state,
-        concernDefail: new ConcernDetail(action.payload),
+        concernDetail: new ConcernDetail(action.payload),
         isConcernDetailFetching: false,
         hasConcernDetailSuccess: true,
       }
