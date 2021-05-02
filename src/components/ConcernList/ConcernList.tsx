@@ -75,6 +75,14 @@ function ConcernList({
     onClearQuery()
   }, [onClearQuery])
 
+  const handleEscapeWebView = useCallback(() => {
+    // @ts-ignore
+    if (window && window.mac && window.mac.webview_close) {
+      // @ts-ignore
+      window.mac.webview_close()
+    }
+  }, [])
+
   const CategoryFilter = useMemo(
     () => (
       <Styled.FilterWrapper width="23%">
@@ -253,7 +261,7 @@ function ConcernList({
           <Styled.HeaderLocationName>{address}</Styled.HeaderLocationName>
         </Styled.HeaderLeftMenu>
         <Styled.HeaderRightMenu>
-          <Styled.HeaderMenuItem>
+          <Styled.HeaderMenuItem onClick={handleEscapeWebView}>
             <SVGIcon name="map" size={24} />
           </Styled.HeaderMenuItem>
           <Styled.HeaderMenuItem onClick={handleClearQuery}>
