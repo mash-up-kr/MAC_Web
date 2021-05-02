@@ -18,7 +18,7 @@ const theme = {
   media,
 }
 
-console.log('v1.0.1')
+console.log('v1.0.2')
 
 ReactDOM.render(
   <React.StrictMode>
