@@ -41,7 +41,7 @@ function ManagerIntro() {
         <Styled.IntroSectionItem>조준형</Styled.IntroSectionItem>
       </Styled.IntroSection>
       <Styled.IntroSection>
-        <Styled.IntroSectionHeader>UX/UI 개발자</Styled.IntroSectionHeader>
+        <Styled.IntroSectionHeader>UX/UI 디자인</Styled.IntroSectionHeader>
         <Styled.IntroSectionItem>고은이</Styled.IntroSectionItem>
         <Styled.IntroSectionItem>박준영</Styled.IntroSectionItem>
         <Styled.IntroSectionItem>조성윤</Styled.IntroSectionItem>
