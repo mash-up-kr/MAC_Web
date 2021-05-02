@@ -11,15 +11,28 @@ import * as Styled from './Concern.styled'
 
 interface ConcernCardProps {
   concernDetail: ConcernDetail
+  directConcernDetailPath: boolean
   onClickLike: () => void
 }
 
-const ConcernCard = ({ concernDetail, onClickLike }: ConcernCardProps) => {
+const ConcernCard = ({
+  concernDetail,
+  directConcernDetailPath,
+  onClickLike,
+}: ConcernCardProps) => {
   const history = useHistory()
 
   const handleClickBack = useCallback(() => {
-    history.goBack()
-  }, [history])
+    if (directConcernDetailPath) {
+      // @ts-ignore
+      if (window && window.mac && window.mac.webview_close) {
+        // @ts-ignore
+        window.mac.webview_close()
+      }
+    } else {
+      history.goBack()
+    }
+  }, [directConcernDetailPath, history])
 
   return (
     <Styled.ConcernCardContainer>

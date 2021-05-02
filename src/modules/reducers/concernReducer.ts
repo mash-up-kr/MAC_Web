@@ -19,10 +19,12 @@ type Action =
   | AsyncActionTypes<typeof getConcernDetailAsyncActions>
   | AsyncActionTypes<typeof postConcernLikeAsyncActions>
   | AsyncActionTypes<typeof deleteConcernLikeAsyncActions>
+  | ReturnType<typeof setDirectConcernDetailPath>
 
 interface State {
   concernList: Immutable.Map<number, Concern>
   concernDetail: ConcernDetail
+  directConcernDetailPath: boolean
   isConcernListFetching: boolean
   hasConcernListSuccess: boolean
   hasConcernListError: boolean
@@ -70,6 +72,8 @@ const DELETE_CONCERN_LIKE_FETCHING = 'concern/DELETE_CONCERN_LIKE_FETCHING' as c
 const DELETE_CONCERN_LIKE_SUCCESS = 'concern/DELETE_CONCERN_LIKE_SUCCESS' as const
 const DELETE_CONCERN_LIKE_ERROR = 'concern/DELETE_CONCERN_LIKE_ERROR' as const
 
+const SET_DIRECT_CONCERN_DETAIL_PATH = 'concern/SET_DIRECT_CONCERN_DETAIL_PATH' as const
+
 export const getConcernList = actionCreator<GetConcernListPayload>(
   GET_CONCERN_LIST,
   { usePromise: true },
@@ -88,6 +92,10 @@ export const postConcerkLike = actionCreator<PostConcernLikePayload>(
 export const deleteConcerkLike = actionCreator<DeleteConcernLikePayload>(
   DELETE_CONCERN_LIKE,
   { usePromise: true },
+)
+
+export const setDirectConcernDetailPath = actionCreator(
+  SET_DIRECT_CONCERN_DETAIL_PATH,
 )
 
 const {
@@ -140,6 +148,7 @@ export function* concernSaga() {
 const initialState: State = {
   concernList: Immutable.Map(),
   concernDetail: new ConcernDetail(),
+  directConcernDetailPath: true,
   isConcernListFetching: false,
   hasConcernListSuccess: false,
   hasConcernListError: false,
@@ -199,6 +208,12 @@ function conceruReducer(state: State = initialState, action: Action) {
         ...state,
         isConcernDetailFetching: false,
         hasConcernDetailError: true,
+      }
+    }
+    case SET_DIRECT_CONCERN_DETAIL_PATH: {
+      return {
+        ...state,
+        directConcernDetailPath: false,
       }
     }
     default:

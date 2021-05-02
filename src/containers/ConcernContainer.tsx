@@ -27,6 +27,9 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
   const dispatch = useDispatch()
   const concernDetail = useSelector(concernSelector.getConcernDetail)
   const answerList = useSelector(answerSelector.getAnswerList)
+  const directConcernDetailPath = useSelector(
+    concernSelector.getDirectConcernDetailPath,
+  )
   const { prevConcernIndex, nextConcernIndex } = useSelector(
     concernSelector.getPrevNextConcern,
   )
@@ -73,6 +76,7 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
     <>
       <ConcernCard
         concernDetail={concernDetail}
+        directConcernDetailPath={directConcernDetailPath}
         onClickLike={handleClickConcernLike}
       />
       <AnswerList

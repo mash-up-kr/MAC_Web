@@ -5,7 +5,10 @@ import axios from 'axios'
 import { isString } from 'lodash'
 
 /* Internal dependencies */
-import { getConcernList } from 'modules/reducers/concernReducer'
+import {
+  getConcernList,
+  setDirectConcernDetailPath,
+} from 'modules/reducers/concernReducer'
 import { setQuery, clearQuery } from 'modules/reducers/queryReducer'
 import * as concernSelector from 'modules/selectors/concernSelector'
 import * as querySelector from 'modules/selectors/querySelector'
@@ -64,6 +67,10 @@ function ConcernListContainer() {
         }
       })
   }, [])
+
+  useEffect(() => {
+    dispatch(setDirectConcernDetailPath())
+  }, [dispatch])
 
   return (
     <ConcernList
