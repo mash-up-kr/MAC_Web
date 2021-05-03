@@ -30,9 +30,6 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
   const directConcernDetailPath = useSelector(
     concernSelector.getDirectConcernDetailPath,
   )
-  const { prevConcernIndex, nextConcernIndex } = useSelector(
-    concernSelector.getPrevNextConcern,
-  )
 
   const handleClickConcernLike = useCallback(() => {
     const actionCreator = concernDetail.liked
