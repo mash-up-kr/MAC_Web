@@ -8,9 +8,9 @@ import * as Styled from './ManagerIntro.styled'
 function ManagerIntro() {
   const handleEscapeWebView = useCallback(() => {
     // @ts-ignore
-    if (window && window.mac && window.mac.webview_close) {
+    if (window && window.mac && window.mac.intro_close) {
       // @ts-ignore
-      window.mac.webview_close()
+      window.mac.intro_close()
     }
   }, [])
 

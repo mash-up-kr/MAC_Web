@@ -15,24 +15,24 @@ export interface LifeCycle {
   reject?: any
 }
 
-export interface ActionType<T, A = string, S = {}> {
-  type: A
+export interface ActionType<T, S = {}> {
+  type: string
   payload: T
   meta: S & LifeCycle
   promise?: Promise<any>
 }
 
-export type ActionGenerator<T, A, S> = (
+export type ActionGenerator<T, S> = (
   payload?: T,
   meta?: S,
-) => ActionType<T extends undefined ? {} : T, A, S>
+) => ActionType<T extends undefined ? {} : T, S>
 
 export type ResponseType<T> = (...args: any[]) => Promise<T>
 
-export function actionCreator<T = {}, A = string, S = {}>(
-  actionType: A,
+export function actionCreator<T = {}, S = {}>(
+  actionType: string,
   option: OptionType = {},
-): ActionGenerator<T, A, S> {
+): ActionGenerator<T, S> {
   return (payload: any = {}, meta: any = {}) => {
     const action = {
       type: actionType,

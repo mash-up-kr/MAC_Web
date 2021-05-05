@@ -10,9 +10,6 @@ export const getConcernList = (state: RootState) =>
 export const getConcernDetail = (state: RootState) =>
   state.concern.concernDetail
 
-export const getDirectConcernDetailPath = (state: RootState) =>
-  state.concern.directConcernDetailPath
-
 export const getPrevNextConcern = createSelector(
   getConcernList,
   getConcernDetail,
