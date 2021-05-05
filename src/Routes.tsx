@@ -13,7 +13,16 @@ const Routes: FC<RouteComponentProps> = () => {
   return (
     <Switch>
       <Route exact path="/concerns" component={Concerns} />
-      <Route exact path="/concern/:id" component={Concern} />
+      <Route
+        exact
+        path="/concern/:id"
+        render={props => <Concern directPath {...props} />}
+      />
+      <Route
+        exact
+        path="/concerns/concern/:id"
+        render={props => <Concern directPath={false} {...props} />}
+      />
       <Route exact path="/intro" component={MangerIntro} />
     </Switch>
   )

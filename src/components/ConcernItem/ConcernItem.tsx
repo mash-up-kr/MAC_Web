@@ -16,7 +16,9 @@ interface ConcernItemProps {
 function ConcernItem({ concern }: ConcernItemProps) {
   return (
     <Styled.ConcernWrapper
-      to={`/concern/${concern.id}?token=${QueryParamService.getToken()}`}
+      to={`/concerns/concern/${
+        concern.id
+      }?token=${QueryParamService.getToken()}`}
     >
       <Styled.CategoryWrapper>
         <SVGIcon name={getConcernItemImageName(concern.category)} size={44} />

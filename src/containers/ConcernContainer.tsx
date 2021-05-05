@@ -21,9 +21,10 @@ import AnswerList from 'components/AnswerList'
 
 interface ConcernContainerProps {
   concernId: string
+  directPath: boolean
 }
 
-function ConcernContainer({ concernId }: ConcernContainerProps) {
+function ConcernContainer({ concernId, directPath }: ConcernContainerProps) {
   const dispatch = useDispatch()
   const concernDetail = useSelector(concernSelector.getConcernDetail)
   const answerList = useSelector(answerSelector.getAnswerList)
@@ -70,6 +71,7 @@ function ConcernContainer({ concernId }: ConcernContainerProps) {
     <>
       <ConcernCard
         concernDetail={concernDetail}
+        directPath={directPath}
         onClickLike={handleClickConcernLike}
       />
       <AnswerList
